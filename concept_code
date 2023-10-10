@@ -1,0 +1,20 @@
+// #concept_code - Serverless AWS Lambda Function
+
+/**
+ * Lambda function to handle an event (e.g., an HTTP request or a file upload),
+ * perform computation or data processing, and return a JSON response.
+ * 
+ * @param {Object} event - The event object representing the input trigger.
+ * @param {Object} context - The execution context of the Lambda function.
+ * @returns {Object} - An HTTP response object with a status code and a JSON body.
+ */
+exports.handler = async (event, context) => {
+    // Handle an event (e.g., an HTTP request or a file upload)
+    // Perform some computation or data processing
+    const result = { message: "Hello, Serverless World!" };
+
+    return {
+        statusCode: 200,
+        body: JSON.stringify(result)
+    };
+};
