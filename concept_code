@@ -1,7 +1,7 @@
 // #concept_code - Serverless AWS Lambda Function
 
 /**
- * Lambda function to handle an event (e.g., an HTTP request or a file upload),
+ * Lambda function to handle various events, such as HTTP requests or file uploads,
  * perform computation or data processing, and return a JSON response.
  * 
  * @param {Object} event - The event object representing the input trigger.
@@ -9,12 +9,63 @@
  * @returns {Object} - An HTTP response object with a status code and a JSON body.
  */
 exports.handler = async (event, context) => {
-    // Handle an event (e.g., an HTTP request or a file upload)
-    // Perform some computation or data processing
-    const result = { message: "Hello, Serverless World!" };
+    try {
+        // Extract relevant data from the event, e.g., request parameters or uploaded file details
+        const requestData = extractData(event);
 
-    return {
-        statusCode: 200,
-        body: JSON.stringify(result)
-    };
+        // Perform computation or data processing using the extracted data
+        const processedData = processData(requestData);
+
+        // Prepare the response object
+        const response = {
+            statusCode: 200,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                success: true,
+                data: processedData,
+                message: 'Operation successful',
+            }),
+        };
+
+        return response;
+    } catch (error) {
+        // Handle errors and return an appropriate error response
+        const errorResponse = {
+            statusCode: 500,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                success: false,
+                error: {
+                    message: 'Internal Server Error',
+                    details: error.message || 'An unexpected error occurred',
+                },
+            }),
+        };
+
+        return errorResponse;
+    }
 };
+
+/**
+ * Extracts relevant data from the event object.
+ * @param {Object} event - The event object representing the input trigger.
+ * @returns {Object} - Extracted data from the event.
+ */
+function extractData(event) {
+    // Implement logic to extract relevant data from the event
+    return event.body || {}; // Placeholder logic, modify as needed
+}
+
+/**
+ * Performs computation or data processing using the extracted data.
+ * @param {Object} data - The extracted data from the event.
+ * @returns {Object} - Processed data.
+ */
+function processData(data) {
+    // Implement logic to process the data
+    return { processed: true, data }; // Placeholder logic, modify as needed
+}
