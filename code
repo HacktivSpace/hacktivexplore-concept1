@@ -1,4 +1,4 @@
-#source_code
+#concept_code
 ---Javascript Code---
 
 exports.handler = async (event, context) => {
