@@ -1,0 +1,14 @@
+#source_code
+---Javascript Code---
+
+exports.handler = async (event, context) => {
+    // Handle an event (e.g., an HTTP request or a file upload)
+    // Perform some computation or data processing
+    const result = { message: "Hello, Serverless World!" };
+
+    return {
+        statusCode: 200,
+        body: JSON.stringify(result)
+    };
+};
+
